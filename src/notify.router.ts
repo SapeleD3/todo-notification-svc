@@ -71,7 +71,7 @@ router.post(ROUTES.SEND_MAIL, async (req: Request, res: Response) => {
   }
 });
 router.get(ROUTES.HOME, (req: Request, res: Response) => {
-  res.send('Welcome to my Updated Notification service Text');
+  res.send('Welcome to my Updated Notification service Text, here and now');
 });
 
 export default router;
