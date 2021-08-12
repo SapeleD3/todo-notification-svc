@@ -37,3 +37,33 @@ export async function validateNotifyInputData(
     });
   }
 }
+
+export async function recievePubsubMessage(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  if (!req.body) {
+    const msg = 'no Pub/Sub message received';
+    console.error(`error: ${msg}`);
+    res.status(400).send(`Bad Request: ${msg}`);
+
+    return;
+  }
+
+  if (!req.body.message) {
+    const msg = 'invalid Pub/Sub message format';
+    console.error(`error: ${msg}`);
+    res.status(400).send(`Bad Request: ${msg}`);
+
+    return;
+  }
+
+  if (req.body.message.body) {
+    const body = req.body.message.body;
+    const pubSubMessageData = Buffer.from(body, 'base64').toString();
+    req.body = JSON.parse(pubSubMessageData);
+  }
+
+  next();
+}

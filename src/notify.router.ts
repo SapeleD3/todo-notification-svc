@@ -1,7 +1,10 @@
 import { Router, Request, Response } from 'express';
 import httpCodes, { ReasonPhrases } from 'http-status-codes';
 import { responseHandler, ROUTES, SendMail } from './index.constants';
-import { validateNotifyInputData } from './notify.middleware';
+import {
+  recievePubsubMessage,
+  validateNotifyInputData,
+} from './notify.middleware';
 import { Notify } from './notify.model';
 
 const router = Router();
@@ -11,6 +14,7 @@ const { INTERNAL_SERVER_ERROR, OK } = httpCodes;
 router.post(
   ROUTES.CREATE_NOTIFICATION,
   validateNotifyInputData,
+  recievePubsubMessage,
   async (req: Request, res: Response) => {
     try {
       const { userId, email, title, description, seen } = req.body;
