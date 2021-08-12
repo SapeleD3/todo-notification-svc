@@ -24,6 +24,7 @@ export async function validateNotifyInputData(
   res: Response,
   next: NextFunction
 ) {
+  console.log('INITIAL_REQ_BODY', req.body);
   try {
     const validValues = await NotifyInputValidationSchema.validateAsync(
       req.body
@@ -43,6 +44,7 @@ export async function recievePubsubMessage(
   res: Response,
   next: NextFunction
 ) {
+  console.log('PUB_SUB_INITIAL_REQ_BODY', req.body);
   if (!req.body) {
     const msg = 'no Pub/Sub message received';
     console.error(`error: ${msg}`);

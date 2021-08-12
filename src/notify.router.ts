@@ -13,8 +13,8 @@ const { INTERNAL_SERVER_ERROR, OK } = httpCodes;
 //create notifcation route
 router.post(
   ROUTES.CREATE_NOTIFICATION,
-  validateNotifyInputData,
   recievePubsubMessage,
+  validateNotifyInputData,
   async (req: Request, res: Response) => {
     console.log('REQ.BODY', req.body);
     try {
