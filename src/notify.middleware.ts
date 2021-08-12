@@ -61,8 +61,8 @@ export async function recievePubsubMessage(
     return;
   }
 
-  if (req.body.message.body) {
-    const body = req.body.message.body;
+  if (req.body.message.data) {
+    const body = req.body.message.data;
     const pubSubMessageData = Buffer.from(body, 'base64').toString();
     req.body = JSON.parse(pubSubMessageData);
   }
