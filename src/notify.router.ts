@@ -16,7 +16,7 @@ router.post(
   validateNotifyInputData,
   recievePubsubMessage,
   async (req: Request, res: Response) => {
-    console.log('REQ.body', req.body);
+    console.log('REQ.BODY', req.body);
     try {
       const { userId, email, title, description, seen } = req.body;
       const { _id } = await Notify.create({
