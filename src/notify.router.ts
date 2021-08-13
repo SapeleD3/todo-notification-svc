@@ -16,7 +16,6 @@ router.post(
   recievePubsubMessage,
   validateNotifyInputData,
   async (req: Request, res: Response) => {
-    console.log('REQ.BODY', req.body);
     try {
       const { userId, email, title, description, seen } = req.body;
       const { _id } = await Notify.create({
@@ -34,7 +33,7 @@ router.post(
         data: {},
       });
     } catch (error) {
-      console.log('ERRPR', error);
+      console.log('ERROR', error);
       return responseHandler(res, INTERNAL_SERVER_ERROR, {
         message: ReasonPhrases.INTERNAL_SERVER_ERROR,
         data: {},
